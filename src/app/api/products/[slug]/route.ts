@@ -4,18 +4,14 @@ import data from "../data.json";
 
 export async function GET(
   _: Request,
-  { params }: { params: { slug: string } },
+  { params }: { params: Promise<{ slug: string }> },
 ) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const { slug } = await params;
 
-  const slug = z.string().parse(params.slug);
-
-  const product = data.products.find((product) => product.slug === slug);
-
-  console.log("product", product);
+  const product = data.products.find((item) => item.slug === slug);
 
   if (!product) {
-    return Response.json({ message: "Product not found." }, { status: 400 });
+    return Response.json({ message: "Product not found" }, { status: 400 });
   }
 
   return Response.json(product);
