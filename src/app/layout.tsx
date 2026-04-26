@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 export const metadata: Metadata = {
   title: {
     template: "%s | Dev Shop",
-    default: "Dev Shop",
+    default: "DevShop",
   },
 };
 

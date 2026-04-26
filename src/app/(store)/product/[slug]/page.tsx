@@ -1,5 +1,6 @@
 import { api } from "@/data/api";
 import { Product } from "@/data/types/products";
+import { Metadata } from "next";
 import Image from "next/image";
 interface productParams {
   params: {
@@ -17,10 +18,32 @@ async function GetProduct(slug: string): Promise<Product> {
   return products;
 }
 
+export async function generateMetadata({
+  params,
+}: productParams): Promise<Metadata> {
+  const { slug } = await params;
+
+  const product = await GetProduct(slug);
+  return {
+    title: `${product.title}`,
+  };
+}
+
+export function generateStaticParams() {
+  return [
+    { slug: "moletom-never-stop-learning" },
+    { image: "/moletom-never-stop-learning.png" },
+    { title: "Moletom Never Stop Learning" },
+    { price: 129 },
+  ];
+}
+
 export default async function PageProduct({ params }: productParams) {
   const { slug } = await params;
 
   const product = await GetProduct(slug);
+
+  console.log("product", product);
 
   return (
     <div className="relative grid max-h-215 grid-cols-3">
