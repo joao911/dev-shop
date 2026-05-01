@@ -2,7 +2,7 @@ import { api } from "@/data/api";
 import { Product } from "@/data/types/products";
 import { Metadata } from "next";
 import Image from "next/image";
-interface productParams {
+export interface productParams {
   params: {
     slug: string;
   };
