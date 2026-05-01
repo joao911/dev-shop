@@ -1,3 +1,4 @@
+import ButtonAddToCart from "@/app/components/ButtonAddToCart";
 import { api } from "@/data/api";
 import { Product } from "@/data/types/products";
 import { Metadata } from "next";
@@ -42,8 +43,6 @@ export default async function PageProduct({ params }: productParams) {
   const { slug } = await params;
 
   const product = await GetProduct(slug);
-
-  console.log("product", product);
 
   return (
     <div className="relative grid max-h-215 grid-cols-3">
@@ -98,12 +97,7 @@ export default async function PageProduct({ params }: productParams) {
             </button>
           </div>
         </div>
-        <button
-          type="button"
-          className="mt-8 flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white"
-        >
-          Adicionar ao carrinho
-        </button>
+        <ButtonAddToCart productId={product.id} />
       </div>
     </div>
   );
